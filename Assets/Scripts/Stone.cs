@@ -9,7 +9,7 @@ namespace Golf
     {
         public bool isAffect = false;
 
-        private void OnCollisionEnter(Collision collision)
+        public void OnCollisionEnter(Collision collision)
         {
             if (collision.transform.TryGetComponent(out Stone other))
             { 

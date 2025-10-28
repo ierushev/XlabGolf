@@ -7,11 +7,11 @@ namespace Golf
     public class GameOverState : GameState
     {
         public GameState mainMenuState;
-        public LevelContr levelContr;
+        public StoneSpawner spawner;
 
         public void Restart()
         {
-            levelContr.ClearStone();
+            spawner.ClearStone();
 
             Exit();
             mainMenuState.Enter();

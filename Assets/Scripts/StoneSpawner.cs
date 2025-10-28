@@ -9,10 +9,50 @@ namespace Golf
     {
         public GameObject[] Rocks;
 
-        public void Spawn()
+        public void ClearStone()
         {
-            var rock = GetRandomRock();
-            Instantiate(rock);
+            GameObject[] stones = GameObject.FindGameObjectsWithTag("Stone");
+            foreach (GameObject stone in stones)
+            {
+                Destroy(stone);
+            }
+
+        }
+        public StoneSpawner spawner;
+        public float minDelay = 2f;
+        public float maxDelay = 6f;
+        public bool isGameOver = false;
+
+        private void Start()
+        {
+            StartSpawn();
+        }
+
+        public void StartSpawn()
+        {
+            StartCoroutine(StartRock());
+        }
+
+        IEnumerator StartRock()
+        {
+            do
+            {
+                float randomDelay = UnityEngine.Random.Range(minDelay, maxDelay);
+                yield return new WaitForSeconds(randomDelay);
+                spawner.Spawn();
+            }
+            while (!isGameOver);
+        }
+
+        public GameObject Spawn()
+        {
+            var prefab = GetRandomRock();
+            if (prefab == null)
+            {
+                return null;
+            }
+
+            return Instantiate(prefab, transform.position, Quaternion.identity);
         }
 
 

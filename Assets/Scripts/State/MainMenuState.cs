@@ -14,6 +14,7 @@ namespace Golf
 
         public void PlayGame()
         {
+            
             Exit();
             gamePlayState.Enter();
         }
